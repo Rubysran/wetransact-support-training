@@ -1,1 +1,1396 @@
-<html><body>FIELDS CAPTURE</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WeTransact Support Agent Training — 1 Week</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --day1: #6C63FF;
+      --day2: #FF6584;
+      --day3: #43C59E;
+      --day4: #FF9A3C;
+      --day5: #3C9EFF;
+      --bg: #F4F6FF;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #6C63FF 0%, #3C9EFF 100%);
+      color: white;
+      padding: 60px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+      top: -200px; right: -100px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+      bottom: -100px; left: -80px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 99px;
+      padding: 6px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 17px;
+      opacity: .88;
+      max-width: 540px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    /* ── OVERALL PROGRESS ── */
+    .progress-wrapper {
+      background: rgba(255,255,255,0.15);
+      border-radius: 99px;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 6px 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .progress-bar-outer {
+      flex: 1;
+      background: rgba(255,255,255,0.25);
+      border-radius: 99px;
+      height: 10px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: white;
+      border-radius: 99px;
+      transition: width .4s ease;
+    }
+    .progress-label {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    /* ── NAV PILLS ── */
+    .day-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .day-nav a {
+      text-decoration: none;
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .day-nav a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .day-nav a.d1 { background: var(--day1); }
+    .day-nav a.d2 { background: var(--day2); }
+    .day-nav a.d3 { background: var(--day3); }
+    .day-nav a.d4 { background: var(--day4); }
+    .day-nav a.d5 { background: var(--day5); }
+
+    /* ── DAY CARD ── */
+    .day-card {
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .day-header {
+      padding: 28px 32px 22px;
+      color: white;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .day-header.d1 { background: linear-gradient(135deg, #6C63FF, #9B93FF); }
+    .day-header.d2 { background: linear-gradient(135deg, #FF6584, #FF96AA); }
+    .day-header.d3 { background: linear-gradient(135deg, #43C59E, #6FD9BE); }
+    .day-header.d4 { background: linear-gradient(135deg, #FF9A3C, #FFB96E); }
+    .day-header.d5 { background: linear-gradient(135deg, #3C9EFF, #6DB8FF); }
+
+    .day-icon {
+      font-size: 40px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .day-meta { flex: 1; }
+    .day-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: .8;
+      margin-bottom: 4px;
+    }
+    .day-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .day-subtitle {
+      font-size: 14px;
+      opacity: .85;
+      line-height: 1.5;
+    }
+    .day-progress-mini {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .day-progress-mini span {
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .day-progress-mini small {
+      font-size: 11px;
+      opacity: .75;
+    }
+    .mini-bar-outer {
+      width: 80px;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .mini-bar-inner {
+      height: 100%;
+      background: white;
+      border-radius: 99px;
+      transition: width .4s ease;
+    }
+
+    /* ── SECTION WITHIN A DAY ── */
+    .day-body { padding: 20px 32px 28px; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 20px 0 10px;
+    }
+    .section-label:first-child { margin-top: 0; }
+
+    /* ── CHECKLIST ITEM ── */
+    .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: background .15s;
+      user-select: none;
+    }
+    .item:hover { background: #f8f9ff; }
+    .item.done { opacity: .55; }
+    .item.done .item-text { text-decoration: line-through; }
+
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      border: 2.5px solid #d1d5db;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      margin-top: 1px;
+    }
+    .item.done .checkbox {
+      border-color: transparent;
+      color: white;
+      font-size: 13px;
+    }
+    .d1 .item.done .checkbox { background: var(--day1); }
+    .d2 .item.done .checkbox { background: var(--day2); }
+    .d3 .item.done .checkbox { background: var(--day3); }
+    .d4 .item.done .checkbox { background: var(--day4); }
+    .d5 .item.done .checkbox { background: var(--day5); }
+
+    .item-content { flex: 1; }
+    .item-text {
+      font-size: 14.5px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .item-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .item-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 99px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .tag-read { background: #EDE9FF; color: #6C63FF; }
+    .tag-watch { background: #FFF0F3; color: #FF6584; }
+    .tag-do { background: #E8FBF5; color: #43C59E; }
+    .tag-quiz { background: #FFF4E8; color: #FF9A3C; }
+
+    /* ── TIP BOX ── */
+    .tip {
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .tip.purple { background: #EDE9FF; border-left: 4px solid var(--day1); }
+    .tip.pink   { background: #FFF0F3; border-left: 4px solid var(--day2); }
+    .tip.green  { background: #E8FBF5; border-left: 4px solid var(--day3); }
+    .tip.orange { background: #FFF4E8; border-left: 4px solid var(--day4); }
+    .tip.blue   { background: #E8F4FF; border-left: 4px solid var(--day5); }
+    .tip-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-text { font-size: 13.5px; line-height: 1.6; color: var(--text); }
+    .tip-text strong { font-weight: 700; }
+
+    /* ── DIVIDER ── */
+    hr.soft { border: none; border-top: 1.5px solid #f0f0f5; margin: 18px 0; }
+
+    /* ── CELEBRATION FOOTER ── */
+    .celebration {
+      background: linear-gradient(135deg, #6C63FF 0%, #FF6584 50%, #FF9A3C 100%);
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      padding: 48px 24px;
+      margin-top: 40px;
+    }
+    .celebration h2 { font-size: 32px; font-weight: 800; margin-bottom: 10px; }
+    .celebration p { font-size: 16px; opacity: .9; max-width: 440px; margin: 0 auto; line-height: 1.7; }
+
+    /* ── SCROLL ANIMATION ── */
+    .day-card { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+    .day-card.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 600px) {
+      .day-header { flex-wrap: wrap; padding: 20px 20px 16px; }
+      .day-body { padding: 16px 20px 22px; }
+      .day-progress-mini { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<header class="hero">
+  <div class="hero-badge">🚀 Support Agent Onboarding</div>
+  <h1>Your 1-Week WeTransact<br>Training Journey</h1>
+  <p>Everything you need to become a confident support agent — broken down day by day, topic by topic. Check things off as you go!</p>
+  <div class="progress-wrapper">
+    <div class="progress-bar-outer">
+      <div class="progress-bar-inner" id="globalBar" style="width:0%"></div>
+    </div>
+    <span class="progress-label" id="globalLabel">0 / 0 done</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<div class="container">
+  <nav class="day-nav">
+    <a href="#day1" class="d1">📘 Day 1 — Foundations</a>
+    <a href="#day2" class="d2">🔐 Day 2 — Access & Rights</a>
+    <a href="#day3" class="d3">🛒 Day 3 — Publishing & Selling</a>
+    <a href="#day4" class="d4">💰 Day 4 — Finance & Orders</a>
+    <a href="#day5" class="d5">🚀 Day 5 — Growth & Mastery</a>
+  </nav>
+
+  <!-- ════════════════════════════════════════════
+       DAY 1 — Platform Foundations
+  ═══════════════════════════════════════════════ -->
+  <div class="day-card" id="day1">
+    <div class="day-header d1">
+      <div class="day-icon">📘</div>
+      <div class="day-meta">
+        <div class="day-label">Day 1 — Monday</div>
+        <div class="day-title">Platform Foundations</div>
+        <div class="day-subtitle">Get comfortable with Microsoft Partner Center and what WeTransact is all about</div>
+      </div>
+      <div class="day-progress-mini">
+        <span class="day-count d1-count">0%</span>
+        <small>completed</small>
+        <div class="mini-bar-outer"><div class="mini-bar-inner d1-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="day-body" data-day="d1">
+
+      <div class="tip purple">
+        <span class="tip-icon">💡</span>
+        <div class="tip-text"><strong>Day 1 Goal:</strong> By end of day you should understand what WeTransact does, how the Microsoft Partner ecosystem works, and how to create a partner account from scratch.</div>
+      </div>
+
+      <div class="section-label">🏁 Getting Started</div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read the WeTransact Self-Help Center overview — bookmark <a href="https://docs.wetransact.io" target="_blank">docs.wetransact.io</a></div>
+          <div class="item-note">This is your support bible. Familiarize yourself with its structure.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read the FAQ — Microsoft Partner Center section</div>
+          <div class="item-note">Learn the basics: what is Partner Center, why does it matter?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to become a Microsoft Partner & get access to Partner Center?</div>
+          <div class="item-note">Core knowledge — you'll be asked this daily by customers.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Creating Your Microsoft Work Account</div>
+          <div class="item-note">Step 1 for almost every new partner you'll ever support.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🏢 Partner Center Setup</div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to enroll in Programs on the Partner Center?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to verify the legal profile?</div>
+          <div class="item-note">Legal profile issues are among the most common support tickets.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to fill out a Payout & Tax profile?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Add a Location and Publisher Account in Partner Center?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🔑 WeTransact Access & Bots</div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Give Access to WeTransact (Partner Center)</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Delete and Re-add support and bot</div>
+          <div class="item-note">You'll need this whenever a customer's bot breaks.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: I have added WeTransact, but support/bot can't log in</div>
+          <div class="item-note">Know this troubleshooting path by heart.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">📝 Day 1 Wrap-up</div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Write 3 bullet points summarizing what WeTransact does in your own words</div>
+          <div class="item-note">If you can explain it simply, you've got it.</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+      <div class="item" data-day="d1" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Note down the 3 most confusing things you encountered today — ask your team lead</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       DAY 2 — Access & User Rights
+  ═══════════════════════════════════════════════ -->
+  <div class="day-card" id="day2">
+    <div class="day-header d2">
+      <div class="day-icon">🔐</div>
+      <div class="day-meta">
+        <div class="day-label">Day 2 — Tuesday</div>
+        <div class="day-title">Access & User Rights</div>
+        <div class="day-subtitle">Master Partner Center and Azure Portal permissions — the #1 source of support tickets</div>
+      </div>
+      <div class="day-progress-mini">
+        <span class="day-count d2-count">0%</span>
+        <small>completed</small>
+        <div class="mini-bar-outer"><div class="mini-bar-inner d2-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="day-body" data-day="d2">
+
+      <div class="tip pink">
+        <span class="tip-icon">🎯</span>
+        <div class="tip-text"><strong>Day 2 Goal:</strong> Be able to diagnose and resolve any user rights or access issue in both Partner Center and Azure Portal without looking things up.</div>
+      </div>
+
+      <div class="section-label">🏛 Partner Center User Rights</div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to verify the level of user rights?</div>
+          <div class="item-note">Always start here when a customer says "I can't do X".</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I determine who has Global Admin & Owner status in Partner Center?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to update Global Admin from non-actionable to actionable?</div>
+          <div class="item-note">A very common "stuck" situation for new partners.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to provide (or update) Partner Center user rights?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I update Owner status in Partner Centre?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do you assign Referral Admin user rights?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I update user rights to manage co-sell solutions in Partner Center?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">☁️ Azure Portal User Rights</div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How can I verify a user's rights to complete a purchase?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Assign Yourself as a Subscription Owner Without Prior Access?</div>
+          <div class="item-note">Customers ask this a LOT when they're locked out.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do you assign the billing administrator role in Microsoft Azure Portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to action admin consent requests?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">👥 User Management</div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Invite External Users in Azure Portal</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Enable Microsoft Authenticator via Azure Portal</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to create a new user?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to check Microsoft Entra application roles?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">📝 Day 2 Wrap-up</div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Draw a quick diagram of the rights hierarchy: Global Admin → Owner → Regular User</div>
+          <div class="item-note">Paper or digital — this mental map will save you constantly.</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+      <div class="item" data-day="d2" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Practice explaining the difference between Partner Center roles and Azure roles to a colleague</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       DAY 3 — Publishing & Selling
+  ═══════════════════════════════════════════════ -->
+  <div class="day-card" id="day3">
+    <div class="day-header d3">
+      <div class="day-icon">🛒</div>
+      <div class="day-meta">
+        <div class="day-label">Day 3 — Wednesday</div>
+        <div class="day-title">Publishing & Selling</div>
+        <div class="day-subtitle">Learn the full product listing flow and how deals get made in the Azure Marketplace</div>
+      </div>
+      <div class="day-progress-mini">
+        <span class="day-count d3-count">0%</span>
+        <small>completed</small>
+        <div class="mini-bar-outer"><div class="mini-bar-inner d3-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="day-body" data-day="d3">
+
+      <div class="tip green">
+        <span class="tip-icon">🎯</span>
+        <div class="tip-text"><strong>Day 3 Goal:</strong> Understand how a product listing is created, published, and sold — from pricing options to private offers. You should be able to walk a customer through the entire flow.</div>
+      </div>
+
+      <div class="section-label">📦 Publishing a Product Listing</div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to add users in the WeTransact Portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Create New Pricing Options?</div>
+          <div class="item-note">Pricing is confusing for most new partners — be the expert.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to clone pricing?</div>
+          <div class="item-note">A huge time saver that customers don't know about.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Set Up the Finance Tab in the WeTransact Portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I set up the Deal Registration tab on WeTransact portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Sync your product listings in one click</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to use existing terms and conditions for the product listing?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to configure multiple Publisher IDs in WeTransact portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🤝 Selling & Private Offers</div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to create a Private Offer?</div>
+          <div class="item-note">Private offers are the most common selling flow for enterprise deals.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to create a Private Offer to CSP</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: CSP private offer vs Resale Enabled Offer</div>
+          <div class="item-note">Know the difference — customers get confused between these two.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to create a Private Plan?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to accept a Private Offer? (Customer walkthrough)</div>
+          <div class="item-note">Read this from the customer's perspective — empathy wins support tickets.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to find and purchase a solution on Azure Marketplace</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Find a Billing ID? + How to find your Tenant ID in Azure portal?</div>
+          <div class="item-note">You'll be asked for these IDs constantly during troubleshooting.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🔄 Subscription Lifecycle</div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Cancel a Subscription in Azure Portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Fix a Suspended Subscription?</div>
+          <div class="item-note">Panic tickets — customers freak out when subscriptions suspend. Stay calm and follow this guide.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I turn off Auto Renew on Azure Subscriptions?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to configure a SaaS account in Azure Portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">📝 Day 3 Wrap-up</div>
+
+      <div class="item" data-day="d3" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Map out the flow: Partner publishes listing → Customer finds offer → Accepts private offer → Subscription activates</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       DAY 4 — Finance, Orders & Troubleshooting
+  ═══════════════════════════════════════════════ -->
+  <div class="day-card" id="day4">
+    <div class="day-header d4">
+      <div class="day-icon">💰</div>
+      <div class="day-meta">
+        <div class="day-label">Day 4 — Thursday</div>
+        <div class="day-title">Finance, Orders & Troubleshooting</div>
+        <div class="day-subtitle">Handle invoices, order issues, and the most common support problems with confidence</div>
+      </div>
+      <div class="day-progress-mini">
+        <span class="day-count d4-count">0%</span>
+        <small>completed</small>
+        <div class="mini-bar-outer"><div class="mini-bar-inner d4-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="day-body" data-day="d4">
+
+      <div class="tip orange">
+        <span class="tip-icon">🎯</span>
+        <div class="tip-text"><strong>Day 4 Goal:</strong> Be the go-to person for billing issues, order problems, and common troubleshooting scenarios. Know exactly which doc to pull up for each situation.</div>
+      </div>
+
+      <div class="section-label">📋 Orders & Activation</div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Activate/Accept Order?</div>
+          <div class="item-note">The first thing a customer needs to do after purchasing.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to find order details in Partner Center?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Guide your customer when they have not completed the order</div>
+          <div class="item-note">Incomplete orders are very common — this is your playbook.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Metering limitations and FAQ</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">💳 Finance & Billing</div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to update payment methods in Microsoft Azure Portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to find your marketplace invoice?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to pay your marketplace invoices?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I change the billing region in Azure Marketplace?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Check if a Legal Profile is Verified?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to view marketplace listing status?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🔧 Troubleshooting</div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Azure Marketplace Procurement Guide</div>
+          <div class="item-note">Full end-to-end guide for when a customer is completely stuck.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Unable to enrol in the commercial Marketplace "Something went wrong..."</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Fixing Legal Profile Issues</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Have an issue with Marketplace leads</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Configuring Cross-Tenant Access for WeTransact in Microsoft Entra</div>
+          <div class="item-note">Advanced — but important when customers have multi-tenant setups.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🎫 Raising Support Tickets</div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to create a Partner Center support ticket?</div>
+          <div class="item-note">Know when to escalate to Microsoft vs. handling it yourself.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to Create a Billing Support Request in Microsoft Azure Portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Raising a support ticket because my legal profile was not validated</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">📝 Day 4 Wrap-up</div>
+
+      <div class="item" data-day="d4" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Create your own "quick reference" cheat sheet for the top 5 billing errors and their fixes</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       DAY 5 — Growth, Co-Sell & Mastery
+  ═══════════════════════════════════════════════ -->
+  <div class="day-card" id="day5">
+    <div class="day-header d5">
+      <div class="day-icon">🚀</div>
+      <div class="day-meta">
+        <div class="day-label">Day 5 — Friday</div>
+        <div class="day-title">GTM, Co-Sell, CRM & Mastery</div>
+        <div class="day-subtitle">Level up — understand the full WeTransact ecosystem and how partners grow their business</div>
+      </div>
+      <div class="day-progress-mini">
+        <span class="day-count d5-count">0%</span>
+        <small>completed</small>
+        <div class="mini-bar-outer"><div class="mini-bar-inner d5-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="day-body" data-day="d5">
+
+      <div class="tip blue">
+        <span class="tip-icon">🎯</span>
+        <div class="tip-text"><strong>Day 5 Goal:</strong> Understand the bigger picture — Go-To-Market tools, IP co-sell, incentives, CRM integrations, and the FAQs. You should now feel ready to handle real tickets independently.</div>
+      </div>
+
+      <div class="section-label">📈 Go-To-Market (GTM)</div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Watch: Video Masterclasses on docs.wetransact.io/GTM</div>
+          <div class="item-note">These videos are gold — watch at least 2 today.</div>
+        </div>
+        <span class="item-tag tag-watch">Watch</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to leverage the WeTransact Collaborative Customer Tab for enhanced sales strategies?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Ecosystem Watchers — Explore Partners and Vendors Across Microsoft Marketplace</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Create Warmify Email Rule in Outlook + Gmail</div>
+          <div class="item-note">Partners love this feature — know how to walk them through it.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🤝 IP Co-Sell</div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Make your application IP-Co-sell Eligible</div>
+          <div class="item-note">The most-asked question in the co-sell category.</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to submit the IP Co-sell documentation?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How to check Azure Consumption (ACR) in the Azure portal?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I use the customisation tool to expedite the co-sell pitch deck?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">💎 Incentives</div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I check Incentive (Transact & Grow) Cashback?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Where to find the Azure Sponsorship?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Where are my marketing benefits in Partner Center?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: How do I enroll for the incentive campaign?</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🔗 CRM Connectors</div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: HubSpot Installation Guide</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Salesforce Installation Guide</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: Creating Co-Sell Deals & Private Offers in Salesforce</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">📚 FAQs — Master the Common Questions</div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: FAQ — Microsoft Partner Center</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: FAQ — WeTransact Portal</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: FAQ — IP Co-Sell</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Read: FAQ — Incentives + Azure Credits</div>
+        </div>
+        <span class="item-tag tag-read">Read</span>
+      </div>
+
+      <hr class="soft"/>
+      <div class="section-label">🏆 Final Challenge</div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Do a mock support call — have a colleague play a confused customer, solve 3 different issues</div>
+          <div class="item-note">One from each area: access rights, billing, and publishing.</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Write a personal "support agent cheat sheet" with the 10 most important links from this week</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+      <div class="item" data-day="d5" onclick="toggle(this)">
+        <div class="checkbox"></div>
+        <div class="item-content">
+          <div class="item-text">Share feedback on this training with your team lead — what was missing? What was great?</div>
+        </div>
+        <span class="item-tag tag-do">Do</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       CELEBRATION
+  ═══════════════════════════════════════════════ -->
+  <div class="celebration" id="celebration" style="display:none">
+    <div style="font-size:64px;margin-bottom:16px">🎉</div>
+    <h2>You Did It!</h2>
+    <p>You've completed your WeTransact Support Agent training. You're now ready to help partners navigate the Microsoft marketplace like a pro. Go crush it! 💪</p>
+  </div>
+
+</div>
+
+<script>
+  // ── State ──
+  const state = JSON.parse(localStorage.getItem('wt-training') || '{}');
+
+  // ── Init ──
+  document.querySelectorAll('.item').forEach(item => {
+    const id = itemId(item);
+    if (state[id]) item.classList.add('done');
+    updateCheckmark(item);
+  });
+  updateAll();
+
+  // ── Toggle ──
+  function toggle(item) {
+    item.classList.toggle('done');
+    updateCheckmark(item);
+    state[itemId(item)] = item.classList.contains('done');
+    localStorage.setItem('wt-training', JSON.stringify(state));
+    updateAll();
+  }
+
+  function updateCheckmark(item) {
+    const box = item.querySelector('.checkbox');
+    box.textContent = item.classList.contains('done') ? '✓' : '';
+  }
+
+  function itemId(item) {
+    return item.dataset.day + '_' + item.querySelector('.item-text').textContent.slice(0, 40);
+  }
+
+  // ── Update progress ──
+  function updateAll() {
+    const days = ['d1','d2','d3','d4','d5'];
+    let grandTotal = 0, grandDone = 0;
+
+    days.forEach(day => {
+      const items = document.querySelectorAll(`.item[data-day="${day}"]`);
+      const done  = document.querySelectorAll(`.item[data-day="${day}"].done`);
+      const pct   = items.length ? Math.round(done.length / items.length * 100) : 0;
+
+      const countEl = document.querySelector(`.${day}-count`);
+      const barEl   = document.querySelector(`.${day}-bar`);
+      if (countEl) countEl.textContent = pct + '%';
+      if (barEl)   barEl.style.width   = pct + '%';
+
+      grandTotal += items.length;
+      grandDone  += done.length;
+    });
+
+    document.getElementById('globalBar').style.width = grandTotal ? Math.round(grandDone / grandTotal * 100) + '%' : '0%';
+    document.getElementById('globalLabel').textContent = grandDone + ' / ' + grandTotal + ' done';
+
+    if (grandDone === grandTotal && grandTotal > 0) {
+      document.getElementById('celebration').style.display = 'block';
+    }
+  }
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.day-card').forEach(c => observer.observe(c));
+</script>
+
+</body>
+</html>
